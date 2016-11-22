@@ -3,20 +3,8 @@
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="ccb.entity">
-    <!--<class name="User">-->
-        <!--<id name="u_id">-->
-            <!--<generator class="native" />-->
-        <!--</id>-->
-        <!--<property name="u_name"/>-->
-        <!--<property name="u_password"/>-->
-        <!--<many-to-one name="groups" foreign-key="g_id" column="u_groups"/>-->
-    <!--</class>-->
-    <!--<class name="Groups">-->
-        <!--<id name="g_id">-->
-            <!--<generator class="native" />-->
-        <!--</id>-->
-        <!--<property name="g_news"/>-->
-        <!--<property name="g_groups"/>-->
-        <!--<property name="g_orders"/>-->
-    <!--</class>-->
+    <class name="User">
+        <id name="name"/>
+        <property name="password"/>
+    </class>
 </hibernate-mapping>

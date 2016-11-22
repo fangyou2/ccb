@@ -10,11 +10,11 @@
         http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
     <context:component-scan base-package="ccb.web"/>
     <mvc:annotation-driven />
-    <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="viewClass" value="org.springframework.ccb.web.servlet.view.JstlView"/>
-        <!--<property name="prefix" value="/WEB-INF/jsp/"/>-->
-        <property name="suffix" value=".jsp"/>
-    </bean>
+    <!--<bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+        <!--<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>-->
+        <!--&lt;!&ndash;<property name="prefix" value="/WEB-INF/jsp/"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;<property name="suffix" value=".jsp"/>&ndash;&gt;-->
+    <!--</bean>-->
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
         <property name="messageConverters">
             <list>

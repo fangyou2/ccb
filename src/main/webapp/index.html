@@ -1,35 +1,37 @@
 <html>
 <head>
     <!-- HTTP 1.1 -->
-	<meta http-equiv="Cache-Control" content="no-store"/>
-	<!-- HTTP 1.0 -->
-	<meta http-equiv="Pragma" content="no-cache"/>
-	<!-- Prevents caching at the Proxy Server -->
-	<meta http-equiv="Expires" content="0"/>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<link rel="icon" href="./images/favicon.ico"/>
-	<link rel="stylesheet" type="text/css" href="./css/ext-all.css"/>
-	<script type="text/javascript" src="./js/ext/ext-base.js"></script>
-	<script type="text/javascript" src="./js/ext/ext-all.js"></script>
-	<script type="text/javascript" src="./js/ext/ext-lang-zh_CN.js"></script>
-	<script type="text/javascript">
-		Ext.BLANK_IMAGE_URL = 'img/s.gif';
-	</script>
-	<link href="./styles/messages.css" rel="stylesheet" type="text/css">
+    <meta http-equiv="Cache-Control" content="no-store"/>
+    <!-- HTTP 1.0 -->
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <!-- Prevents caching at the Proxy Server -->
+    <meta http-equiv="Expires" content="0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="icon" href="./images/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="./css/ext-all.css"/>
+    <script type="text/javascript" src="./js/ext/ext-base.js"></script>
+    <script type="text/javascript" src="./js/ext/ext-all.js"></script>
+    <script type="text/javascript" src="./js/ext/ext-lang-zh_CN.js"></script>
+    <script type="text/javascript">
+        Ext.BLANK_IMAGE_URL = 'img/s.gif';
+    </script>
+    <link href="./styles/messages.css" rel="stylesheet" type="text/css">
     <title>需求保障管理系统</title>
     <link rel="stylesheet" type="text/css" href="./styles/style.css"/>
     <script language="javascript" src="./js/Clock.js"></script>
+    <script type="application/javascript" src="js/jquery.min.js"></script>
+    <script type="application/javascript" src="js/vue.js"></script>
+    <script type="application/javascript" src="js/vue-resource.min.js"></script>
 </head>
 <body>
 <div id="loading-mask" style=""></div>
 <div id="loading">
     <div class="loading-indicator">
     </div>
-	<script language="javascript" src="./menuManager.js"></script>
+    <script language="javascript" src="./menuManager.js"></script>
     <div id="north">
         <span>
             <div height="90" class="api-title" style="background: url('images/top_bg.jpg') repeat-x; height:90px">
-				
                 <img src="images/top.gif">
             </div>
             <div height="20" style="background: url('images/menu_bg.jpg') repeat-x;height:20px;font-size:10pt;">
@@ -37,7 +39,9 @@
                     <label id="nowDateTime">&nbsp;</label>
                 </div>
                 <div style="float:right;margin:0 5px 0 0;font:normal 12px tahoma, arial, sans-serif;color:#ffffff;">
-                    [欢迎]&nbsp; 系统&nbsp;&nbsp;系统管理员 &nbsp;&nbsp;<a href="#" onClick="window.top.location.href = 'login.html';">【退出】</a>
+                    <div id="app">
+                        [欢迎]&nbsp;&nbsp;{{name}} &nbsp;&nbsp;<a v-on:click="logout">【退出】</a>
+                    </div>
                 </div>
             </div>
         </span>
@@ -50,7 +54,9 @@
             &nbsp;
         </div>
         <div style="float:right;margin:5px;font:normal 12px tahoma, arial, sans-serif;">
-             Powered By <span style="color:blue;">烁思科技</span> <a href="javascript:void(0);"><img src="images/logo.jpg" alt="与我们联系 13060186699"></a>        </div>
+            Powered By <span style="color:blue;">烁思科技</span> <a href="javascript:void(0);"><img src="images/logo.jpg"
+                                                                                                alt="与我们联系 13060186699"></a>
+        </div>
     </div>
 </div>
 <script type="text/javascript">
@@ -59,3 +65,33 @@
 </script>
 </body>
 </html>
+<script type="application/javascript">
+    new Vue({
+        el: '#app',
+        data: {
+            name: "管理员名字"
+        },
+        methods: {
+            login: function () {
+                apiUrl = "getName.do";
+                this.$http.get(apiUrl).then(function (response) {
+                    if(response.data!=false){
+                        this.$set('name', response.data);
+                    }else{
+                        location.href="login.html";
+                    }
+                })
+            },
+            logout: function () {
+                apiUrl = "logout.do";
+                this.$http.get(apiUrl).then(function (response) {
+                    location.href="login.html";
+                })
+            }
+        },
+        ready: function () {
+//            是否登录
+            this.login()
+        }
+    })
+</script>

@@ -4,6 +4,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>登录</title>
     <link rel="stylesheet" type="text/css" href="styles/login.css" />
+    <script type="application/javascript" src="js/jquery.min.js"></script>
+    <script type="application/javascript" src="js/vue.js"></script>
+    <script type="application/javascript" src="js/vue-resource.min.js"></script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -16,15 +19,15 @@
                 <div class="LogoImg">
                     &nbsp;
                 </div>
-                <table class="LoginTb">
+                <table class="LoginTb" id="app">
                     <tr>
                         <td class="LoginTbLeft">
                             用户名:
-                              <input name="account" type="text" style="width:100px; height:22px;">
+                              <input v-model="name" name="account" type="text" style="width:100px; height:22px;">
                       </td>
                         <td rowspan="3" class="LoginTbRight">
-						<a href="index.html">
-							<img src="images/BtnLogin.gif" name="Image1" border="0" id="Image1">
+						<a>
+							<img v-on:click="login" src="images/BtnLogin.gif" name="Image1" border="0" id="Image1">
 					    </a>                       
 					  </td>
                     </tr>
@@ -35,7 +38,7 @@
                     <tr>
                       <td class="LoginTbLeft">
                             密&#12288;码:
-                            <input type="password" name="password" style="width:100px; height:22px;">
+                            <input v-model="password" type="password" name="password" style="width:100px; height:22px;">
                         </td>
                     </tr>
                 </table>
@@ -45,3 +48,24 @@
     </form>
 </body>
 </html>
+<script type="application/javascript">
+    new Vue({
+        el: '#app',
+        data: {
+            name:"",
+            password:""
+        },
+        methods: {
+            login: function () {
+                apiUrl = "login.do?name="+this.name+"&password="+this.password;
+                this.$http.get(apiUrl).then(function (response) {
+                    if(response.data){
+                        location.href="index.html";
+                    }else {
+                        alert("登录失败");
+                    }
+                })
+            }
+        }
+    })
+</script>
