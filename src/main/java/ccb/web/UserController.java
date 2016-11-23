@@ -31,25 +31,36 @@ public class UserController {
             result = userService.login(user);
             //登录成功，将用户信息放在session中
             if(result){
+                user=userService.getUser(user);
+                user.setPassword("");
                 httpSession.setAttribute("login",user);
             }
         }
         return result;
     }
-    @RequestMapping("getName.do")
-    public @ResponseBody String getName(User user,HttpSession httpSession){
-        String result;
-        Object login = httpSession.getAttribute("login");
-        if(login==null){
-            result="false";
-        }else{
-            result=((User)login).getName();
-        }
-        return result;
+    @RequestMapping("getUser.do")
+    public @ResponseBody User getUser(HttpSession httpSession){
+        return (User) httpSession.getAttribute("login");
     }
 
     @RequestMapping("logout.do")
     public @ResponseBody void logout(HttpSession httpSession){
         httpSession.removeAttribute("login");
+    }
+
+    @RequestMapping("reset.do")
+    public @ResponseBody boolean reset(String password,String newpass,HttpSession httpSession){
+        boolean result=false;
+        User user = (User) httpSession.getAttribute("login");
+        user.setPassword(password);
+        //验证密码是否正确
+        if(login(user,httpSession)){
+            user.setPassword(newpass);
+            userService.reset(user);
+            //清除session，重新登录
+            httpSession.removeAttribute("login");
+            result=true;
+        }
+        return result;
     }
 }

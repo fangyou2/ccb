@@ -19,9 +19,9 @@ public class UserDaoTest {
     @Autowired
     private UserService userService;
 
-    @Test
-    public void getByName(){
-        boolean login = userService.login(new User("admin1", "admin"));
-        Assert.assertTrue(login);
-    }
+//    @Test
+//    public void getByName(){
+//        boolean login = userService.login(new User("admin1", "admin"));
+//        Assert.assertTrue(login);
+//    }
 }

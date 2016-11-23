@@ -5,9 +5,12 @@
 <title>需求保障管理系统</title>
 <link href="styles/style.css" rel="stylesheet" type="text/css">
 <script language="javascript" src="js/js.js"></script>
+<script type="application/javascript" src="js/jquery.min.js"></script>
+<script type="application/javascript" src="js/vue.js"></script>
+<script type="application/javascript" src="js/vue-resource.min.js"></script>
 </head>
 <body>
-<div style="width:30%;margin: 0 auto; margin-top:15px; ">
+<div style="width:30%;margin: 0 auto; margin-top:15px; " id="app">
   <table class="table11">
     <tr>
       <th style="padding:0 0 0 0; width:30%;"></th>
@@ -18,22 +21,51 @@
     </tr>
     <tr>
       <td style="text-align:right;">旧密码</td>
-      <td style="text-align:left;"><input name="oldPass" type="password" style="width:85%;" value="123">      </td>
+      <td style="text-align:left;"><input v-model="password" name="oldPass" type="password" style="width:85%;">      </td>
     </tr>
     <tr>
       <td style="text-align:right;">新密码</td>
-      <td style="text-align:left; "><input name="password" type="password" style="width:85%;" value="000000" size="30">      </td>
+      <td style="text-align:left; "><input v-model="newpass" name="password" type="password" style="width:85%;" size="30">      </td>
     </tr>
     <tr>
       <td style="text-align:right;">确认新密码</td>
-      <td style="text-align:left; "><input name="repass" type="password" style="width:85%;" value="000000" size="30">      </td>
+      <td style="text-align:left; "><input v-model="repass" name="repass" type="password" style="width:85%;" size="30">      </td>
     </tr>
     <tr>
-      <td colspan="2" align="center"><input type="submit" name="Submit" value="提 交" class="btn" onmouseover="changebg(this,'1')" onmouseout="changebg(this,'1')">
+      <td colspan="2" align="center">
+        <button v-on:click="reset" class="btn">提 交</button>
         &nbsp;&nbsp;
-        <input name="Submit2222" type="submit"  onclick="javascript:history.go(-1)" value="返 回" class="btn" onmouseover="changebg(this,'1')" onmouseout="changebg(this,'1')" />      </td>
+        <button onclick="javascript:history.go(-1)"  class="btn">返 回</button>
+      </td>
     </tr>
   </table>
 </div>
 </body>
 </html>
+<script type="application/javascript">
+  new Vue({
+    el: '#app',
+    data: {
+      password:"",
+      newpass: "",
+      repass:""
+    },
+    methods: {
+      reset: function () {
+        if(this.newpass==this.repass){
+          apiUrl = "reset.do?password="+this.password+"&newpass="+this.newpass;
+          this.$http.get(apiUrl).then(function (response) {
+            if(response.data){
+              alert("密码修改成功，重新登录");
+              window.parent.location.href="login.html";
+            }else{
+              alert("旧密码错误");
+            }
+          })
+        }else{
+          alert("两次密码输入不同");
+        }
+      }
+    }
+  })
+</script>

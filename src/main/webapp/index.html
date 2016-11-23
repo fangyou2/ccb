@@ -40,7 +40,7 @@
                 </div>
                 <div style="float:right;margin:0 5px 0 0;font:normal 12px tahoma, arial, sans-serif;color:#ffffff;">
                     <div id="app">
-                        [欢迎]&nbsp;&nbsp;{{name}} &nbsp;&nbsp;<a v-on:click="logout">【退出】</a>
+                        [欢迎]&nbsp;{{role}}&nbsp;&nbsp;{{name}} &nbsp;&nbsp;<button v-on:click="logout">【退出】</button>
                     </div>
                 </div>
             </div>
@@ -69,22 +69,29 @@
     new Vue({
         el: '#app',
         data: {
-            name: "管理员名字"
+            name: "名字",
+            role:"角色"
         },
         methods: {
             login: function () {
-                apiUrl = "getName.do";
-                this.$http.get(apiUrl).then(function (response) {
-                    if(response.data!=false){
-                        this.$set('name', response.data);
-                    }else{
-                        location.href="login.html";
+                var vm=this;
+                $.ajax({
+                    url: "getUser.do",
+                    success: function(response){
+                        if(response!=""){
+                            vm.$set('name', response.name);
+                            vm.$set('role', response.role);
+                        }else{
+                            alert("未登录，请重新登录");
+                            location.href="login.html";
+                        }
                     }
-                })
+                });
             },
             logout: function () {
                 apiUrl = "logout.do";
                 this.$http.get(apiUrl).then(function (response) {
+                    alert("退出成功");
                     location.href="login.html";
                 })
             }

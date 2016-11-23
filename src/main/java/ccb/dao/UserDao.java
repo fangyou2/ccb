@@ -17,4 +17,9 @@ public class UserDao {
         Session session = sessionFactory.getCurrentSession();
         return session.get(User.class,user.getName());
     }
+
+    public void put(User user) {
+        Session session = sessionFactory.getCurrentSession();
+        session.update(user);
+    }
 }

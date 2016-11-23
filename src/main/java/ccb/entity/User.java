@@ -6,13 +6,15 @@ package ccb.entity;
 public class User {
     private String name;
     private String password;
+    private String role;
 
     public User() {
     }
 
-    public User(String name, String password) {
+    public User(String name, String password, String role) {
         this.name = name;
         this.password = password;
+        this.role = role;
     }
 
     public String getName() {
@@ -29,5 +31,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

@@ -19,4 +19,12 @@ public class UserService {
             return false;
         }
     }
+
+    public User getUser(User user) {
+        return userDao.getByName(user);
+    }
+
+    public void reset(User user) {
+        userDao.put(user);
+    }
 }
