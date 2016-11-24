@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="ccb.entity">
+    <class name="Mystery">
+        <id name="mystery_id">
+            <generator class="native"/>
+        </id>
+        <property name="mystery_type"/>
+        <property name="mystery_detailed"/>
+        <property name="mystery_level"/>
+        <property name="mystery_trial"/>
+        <property name="mystery_department"/>
+        <property name="mystery_responseTime"/>
+        <property name="mystery_timeLimit"/>
+        <property name="mystery_Remark"/>
+        <property name="mystery_describe"/>
+        <property name="mystery_declarationPoint"/>
+        <property name="mystery_declarationName"/>
+        <property name="mystery_phone"/>
+    </class>
+</hibernate-mapping>
