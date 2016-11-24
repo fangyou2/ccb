@@ -1,5 +1,6 @@
 package ccb.dao;
 
+import ccb.entity.Goods;
 import ccb.entity.Notice;
 import ccb.entity.Page;
 import ccb.entity.Style;
@@ -51,5 +52,31 @@ public class GoodsDao {
     public int getTotal() {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("from Goods").list().size();
+    }
+
+    /**
+     * 搜索
+     * @param page
+     * @param style
+     * @param keyword
+     * @return
+     */
+    public List<?> getLimitByKey(Page page, Style style, String keyword) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createSQLQuery("select * from Goods g where g.style_id=:style and name like :keyword")
+                .addEntity(Goods.class)
+                .setParameter("style",style.getId())
+                .setParameter("keyword","%"+keyword+"%")
+                .setFirstResult(page.getCurrentNumber())
+                .setMaxResults(page.getPageNumber())
+                .list();
+    }
+
+    public int getTotalByKey(Style style, String keyword) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createSQLQuery("select * from Goods g where g.style_id=:style and name like :keyword")
+                .setParameter("style",style.getId())
+                .setParameter("keyword","%"+keyword+"%")
+                .list().size();
     }
 }

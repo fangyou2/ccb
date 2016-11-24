@@ -39,4 +39,19 @@ public class GoodsService {
         return goodsDao.getTotal();
     }
 
+    //搜索功能
+    public Page search(Page page,Style style, String keyword) {
+        if(page==null){
+            page=new Page();
+        }
+        page.setList(goodsDao.getLimitByKey(page,style,keyword));
+        //设置总的条数
+        page.setTotalNumber(getTotalByKey(style,keyword));
+        page.init();
+        return page;
+    }
+
+    public int getTotalByKey(Style style, String keyword) {
+        return goodsDao.getTotalByKey(style,keyword);
+    }
 }

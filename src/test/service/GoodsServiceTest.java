@@ -44,5 +44,16 @@ public class GoodsServiceTest {
         System.out.println();
     }
 
+    @Test
+    public void getTotalByKey(){
+        int 笔 = goodsService.getTotalByKey(new Style(6, null, null), "笔");
+        System.out.println();
+    }
+    @Test
+    public void search(){
+        Page 笔 = goodsService.search(new Page(), new Style(6, null, null), "笔");
+        System.out.println();
+    }
+
 
 }
