@@ -18,16 +18,21 @@ public class Mystery {
     private String mystery_declarationPoint;//需求申报点
     private String mystery_declarationName;//需求申报人
     private String mystery_phone;//联系电话
-    private String mystery_declarationTime;//上报时间
-    private String mystery_reminder;//是否催办
-    private String mystery_submitPresident;//是否提交行长
-    private String mystery_state;//当前所处状态
+//    private String mystery_declarationTime;//上报时间
+//    private String mystery_reminder;//是否催办
+//    private String mystery_submitPresident;//是否提交行长
+//    private String mystery_state;//当前所处状态
 
     public Mystery() {
 
     }
 
-
+    public Mystery(Integer mystery_type, String mystery_trial, String mystery_detailed, Integer mystery_level) {
+        this.mystery_type = mystery_type;
+        this.mystery_trial = mystery_trial;
+        this.mystery_detailed = mystery_detailed;
+        this.mystery_level = mystery_level;
+    }
 
     public Integer getMystery_id() {
         return mystery_id;
