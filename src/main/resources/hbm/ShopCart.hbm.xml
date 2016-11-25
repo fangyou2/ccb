@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="ccb.entity">
+    <class name="ShopCart">
+        <id name="id">
+            <generator class="native"/>
+        </id>
+        <property name="number"/>
+        <property name="status"/>
+        <property name="date"/>
+        <many-to-one name="user" class="User" cascade="persist" lazy="false">
+            <column name="user_name"/>
+        </many-to-one>
+        <many-to-one name="goods" class="Goods" cascade="persist" lazy="false">
+            <column name="goods_id"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>
