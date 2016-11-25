@@ -18,10 +18,11 @@ public class Mystery {
     private String mystery_declarationPoint;//需求申报点
     private String mystery_declarationName;//需求申报人
     private String mystery_phone;//联系电话
-//    private String mystery_declarationTime;//上报时间
-//    private String mystery_reminder;//是否催办
-//    private String mystery_submitPresident;//是否提交行长
-//    private String mystery_state;//当前所处状态
+
+    private String mystery_declarationTime;//上报时间
+    private Integer mystery_reminder=0;//催办次数
+    private String mystery_submitPresident="否";//是否提交行长
+    private String mystery_state="等待响应";//当前所处状态
 
     public Mystery() {
 
@@ -32,6 +33,38 @@ public class Mystery {
         this.mystery_trial = mystery_trial;
         this.mystery_detailed = mystery_detailed;
         this.mystery_level = mystery_level;
+    }
+
+    public String getMystery_declarationTime() {
+        return mystery_declarationTime;
+    }
+
+    public void setMystery_declarationTime(String mystery_declarationTime) {
+        this.mystery_declarationTime = mystery_declarationTime;
+    }
+
+    public Integer getMystery_reminder() {
+        return mystery_reminder;
+    }
+
+    public void setMystery_reminder(Integer mystery_reminder) {
+        this.mystery_reminder = mystery_reminder;
+    }
+
+    public String getMystery_submitPresident() {
+        return mystery_submitPresident;
+    }
+
+    public void setMystery_submitPresident(String mystery_submitPresident) {
+        this.mystery_submitPresident = mystery_submitPresident;
+    }
+
+    public String getMystery_state() {
+        return mystery_state;
+    }
+
+    public void setMystery_state(String mystery_state) {
+        this.mystery_state = mystery_state;
     }
 
     public Integer getMystery_id() {

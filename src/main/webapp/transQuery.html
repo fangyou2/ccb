@@ -1,12 +1,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+<script type="application/javascript" src="js/jquery.min.js"></script>
+<script type="application/javascript" src="js/vue.js"></script>
+<script type="application/javascript" src="js/vue-resource.min.js"></script>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
 <title>流程监控</title>
 <script language="javascript" src="js/js.js"></script>
 <link href="styles/style.css" rel="stylesheet" type="text/css">
 </head>
-<body>
+<body id="app">
 <table class="table11" cellpadding="0" cellspacing="0" style="margin:0px auto;margin-top:15px;">
       <th style="width:70px;padding:0;"></th>
       <th style="width:100px;padding:0;"></th>
@@ -30,7 +33,28 @@
       <th style="width:100px;">上报时间</th>
       <th style="width:40px;">操作</th>
     </tr>
-    <tr>
+  <script type="application/javascript">
+    $.ajax({
+      url: "getMysterys.do",
+      type: 'post',
+
+      success: function (page) {
+
+        new Vue({
+          el: '#app',
+          data: {
+            mysterys:page.list
+          }
+
+
+
+        })
+      }
+
+    });
+
+  </script>
+    <tr  v-for="mystery in mysterys ">
       <td>待初审响应</td>
       <td>网点设施类 </td>
       <td>临时停电保障</td>
